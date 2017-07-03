@@ -1,116 +1,91 @@
-body{
-	background:url('https://img2.brain4.photobox.com/856924934a4b40fed12cf5a4fe66302dd2de6543bc9c75785ee4b5dc84d287685481e085.jpg') center center fixed;
-	background-size:cover;
-}
-
-
-
-#about{
-	background-color:rgba(199, 205, 216,.75);
-	width:100%;
-	padding:3%;
+#box{
+	min-width:80%;
 	margin-top:7%;
-	text-align:right;
+	margin-left:10%;
+	margin-right:10%;
+	background-color:rgba(0,0,0,.40);
+	color:white;
 }
-div.style_img img{
-	max-width:100%;
-	padding-bottom:4%;
+#messageBox{
+	text-align:center;
 }
-#neme{
+#btn-box{
+	padding-top:7%;
+	
+	
+}
+#overlay{
+	background-color:rgba(0,0,0,.40);
+	height:100%;
+
+}
+body{
+	background-image:url('http://wallpapercave.com/wp/tLMXA8y.jpg');
+	background-position:center center;
+	background-size:cover;
+	background-repeat:no-repeat;
+	background-attachment:fixed;
+}	
+#msg_btn{
+	padding-left:7%;
+	padding-right:7%;
+	padding-top:2%;
 	padding-bottom:2%;
-}
-#neme h2{
-	font-size:27px;
-}
-#portofolio h5{
-	font-size:18px;
-}
-#footer1{
-	width:100%;
-	height:auto;
-	margin-left:0;
-	margin-right:0;
-	background-color:#e8f0ff;
-	padding-top:5%;
-	padding-bottom:5%;
-}
-.custom{
-	width:50px !important;
-	height:50px !important;
-	border-radius:100%;
-	border:2px solid gray;
-}
-.custom i{
-	vertical-align:center;
-	padding-top:4px !important;
-}
-.custom:hover{
-	background-color:#8d00f2;
+	background-color:rgba(0,0,0,.10);
+	border:2px solid #17B458;
 	color:white;
-	-webkit-transition:all .3s ease-in;
-	transition:all .3s ease-in;
+	
 }
-#footer2{
-	background-color:#8c00ff;
-	width:100%;
-	height:auto;
-	margin-left:0;
-	margin-right:0;
-	padding-top:10px;
-	padding-bottom:10px;
+#header{
+	color:#f7bc27;
+	font-family:Lobster;
+}
+#line{
+	color:blue;
+	width:60%;
+}
+hr{
+	background-color:blue;
+	display:block;
+	border:1px solid blue;
+	
+}
+#footer{
 	color:white;
-	border-top:3px solid #d63a02;
+	padding-top:8%;
+
 }
-#about h4{
-	line-height:1.4;
-}
-#contact h4{
-	line-height:1.4;
-}
-#portofolio{
-	background-color:rgba(199, 205, 216,.75);
-}
-#contact{
-	background-color:rgba(199, 205, 216,.75);
-}
-#portofolio img{
-	border-radius:5px;
-	border:2px solid transparent;
-}
-.style_header{
-	opacity:.75;
-	color:#93ff21;
-}
-.style_header:hover{
-	opacity:.95;
+#footer a{
+	color:#f7bc27;
+
 }
 
 
 @media only screen and (max-width: 500px) {
-	#about{
-		margin-top:25%;
+	#messageBox h2{
+		font-size:18px;
 	}
-	div.ph_style{
+	#box{
+		width:100%;
+		margin-left:0;
+		margin-right:0;
+	}
+	#msg_btn{
+		padding-left:10%;
+		padding-right:10%;
+		padding-top:4%;
+		padding-bottom:4%;
+	}
+	#line{
+		color:blue;
+		width:100%;
+	}
+	#footer{
+		padding-top:13%;
+	}
+	#btn-box{
 		padding-top:10%;
-	}
-	.ph_style2 h2{
-		font-size:25px;
-	}
-	#about h2,h3,h4{
-		text-align:center;
-	}
-	#contact h4{
-		text-align:justify;
-		padding-top:25px;
-	}
-	#portofolio h5{
-		font-size:14px;
-	}
-	#footer2 h4{
-		font-size:15px;
-	}
-	.style_pn5{
-		padding-top:5%;
-		padding-bottom:5%;
+	
+	
 	}
 }
