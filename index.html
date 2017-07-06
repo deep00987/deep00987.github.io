@@ -1,99 +1,178 @@
+<!DOCTYPE html>
 <html>
+
 <head>
-	<title>random quote mechine</title>
-	<link rel="stylesheet" type="text/css" href="/css/main.css">
+	<title>Local weather</title>
+	<link rel="sytlesheet" type="text/css" href="main.css">
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
 	<!-- jQuery library -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
 	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+	
+	<style>
+	
+		body{
+			background-image:url("https://static.pexels.com/photos/158607/cairn-fog-mystical-background-158607.jpeg");
+			background-position:center center;
+			background-attachment:fixed;
+			background-repeat:no-repeat;
+			background-size:cover;
+		}
+		#box{
+			width:60%;
+			margin-left:20%;
+			margin-right:20%;
+			background-color:rgba(225,225,225,.60);
+			
+		}
+		#pad{
+			padding-bottom:15%;
+		}
+		#add a{
+			color:#f7935d;
+			
+		}
+		#option{
+			padding-bottom:5%;
+			font-family:Lobster;
+			color:#4f1f16;
+		}
+		@media only screen and (max-width: 500px) {
+			#box{
+			width:90%;
+			margin-left:5%;
+			margin-right:5%;
+			background-color:rgba(225,225,225,.60);
+			
+		}
+			
+		}
+
+	
+	</style>
+	
 	
 </head>
 
+
+
 <body>
-
-
-	<div>
-		<div class="container">
-			<div id="header" align ="center"><h2>A Random Quote Mechine</h2>
-				<hr id="line"/>
-			
+	<center><h1 id="option">A Local Weather App<h1>
+		<hr style="width:75%;margin-top:-4%;padding-bottom:4%;">
+	</center>
+		
+	<div id="box" class="container jumbotron">
+		
+		<div class="row main" align="center">
+			<div class="col-md-6 col-md-12" id="one">
+				<h2><span class="loc"></span></h2>
+				<h4><span class="desc"></span></h4>
+				<h2><span><img src="#" alt="" class="icon"></img></span><span class ="temp"></span>&deg;<a  href="#"class="change">C</a></span> | <a  href="#"class="change2">F</a></h2>
 			</div>
-		
-			<div class="jumbotron"  id="box">
-				<div id="messageBox">
-					<h2 class="msg"></h2><br>
-					<i class="author"></i><br>	
-				</div>
-				<div id="btn-box"  align="center">
-					<button id="msg_btn" class="btn btn-default quote">
-						New Quote
-					</button>
-					<a id="msg_btn" class="btn btn-default twt">
-						Tweet out
-					</a>
-				</div>
+			<div class="col-md-6 col-md-12" id="two">
+				<h3 class="city"></h3>
+				<h3 class="wind"></h3>
+				<h3 class="preasure"></h3>
 			</div>
-		
-		
 		</div>
-		
-		
 	</div>
-	<div class="container" id="footer" align="center">
-		<p>Coded and Designed by <a href="https://github.com/deep00987">Dwip s.Mondal</a> || Powered by <a href="https://forismatic.com/en/api/">Forismatic API</a></p>
-	</div>
+	<div align="center" id="add" style="color:#f4e4dc;padding-top:3%;"><h5>Coded and designed by <a href="https://www.facebook.com/profile.php?id=100009758328154&ref=bookmarks">Dwip S.Mondal</a> powered by <a href="https://openweathermap.org/api">OpenWeatherMap API</a></h5></div>
+</body>
 
-</body>	
 <script>
 	$(document).ready(function(){
-  var Qt="";
-  var At="";
-  var colorArr=[];
-  var x = Math.floor((Math.random()*10) +1);
-   getQuote();
-   $(".quote").on("click", function(){
-    getQuote();
-  });
-   $(".quote").on("click",function(){
-	var colArr=["#FF6633", "#FF3333", "#FFCCCC","#78cc1e","#f7ad2e","#f76e2e","#f7422d","#7d2df7","#e100ff","pink","white","aqua","brown","coral"];
-	var x = Math.floor((Math.random()*14)+1);
-	$(".msg").css("color", colArr[x]);
-   });
+	  var lat;
+	  var log;
+	  
+	  if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(function(position) {
+		  lat = position.coords.latitude;
+		  log = position.coords.longitude; 
+		  var url2 = "http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+log+"&appid=c0f103118dea6c47909754c7e22ad0f6&units=imperial";
+		  var url="http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+log+"&appid=c0f103118dea6c47909754c7e22ad0f6&units=metric";
+		  $.getJSON(url,function(data){
+			var temperature = data.main.temp;
+			var icon = "http://openweathermap.org/img/w/"+data.weather[0].icon+".png";
+			var desc = data.weather[0].description;
+			var humid = data.main.humidity;
+			var country = data.sys.country;
+			var city = data.name;
+			var wind = data.wind.speed;
+			var preasure = data.main.pressure;
+			$(".temp").html(temperature);
+			$(".icon").attr('src',icon);
+			$(".desc").html(desc);
+			$(".city").html("Humidity: "+humid+"%");
+			$(".loc").html("location: "+city +","+country);
+			$(".wind").html("wind: "+wind+" km/h");
+			$(".preasure").html("Pressure: "+preasure+" pascal");
+			
+			
+			
+		  });
+		  
+		  $(".change2").on("click",function(){
+			$.getJSON(url2,function(data){
+			var temperature = data.main.temp;
+			var icon = "http://openweathermap.org/img/w/"+data.weather[0].icon+".png";
+			var desc = data.weather[0].description;
+			var humid = data.main.humidity;
+			var country = data.sys.country;
+			var city = data.name;
+			var wind = data.wind.speed;
+			var preasure = data.main.pressure;
+			$(".temp").html(temperature);
+			$(".icon").attr('src',icon);
+			$(".desc").html(desc);
+			$(".city").html("Humidity: "+humid+"%");
+			$(".loc").html("location: "+city +","+country);
+			$(".wind").html("wind: "+wind+" m/s");
+			$(".preasure").html("Pressure: "+preasure+" pascal");
+			
+			
+		  });
+			
+			
+		  });
+		  
+		  $(".change").on("click",function(){
+			$.getJSON(url,function(data){
+			var temperature = data.main.temp;
+			var icon = "http://openweathermap.org/img/w/"+data.weather[0].icon+".png";
+			var desc = data.weather[0].description;
+			var humid = data.main.humidity;
+			var country = data.sys.country;
+			var city = data.name;
+			var wind = data.wind.speed;
+			var preasure = data.main.pressure;
+			$(".temp").html(temperature);
+			$(".icon").attr('src',icon);
+			$(".desc").html(desc);
+			$(".city").html("Humidity: "+humid+"%");
+			$(".loc").html("location: "+city +","+country);
+			$(".wind").html("wind: "+wind+" km/h");
+			$(".preasure").html("Pressure: "+preasure+" pascal");
+			
+			
+			
+		  });
+			
+		  });
+		  
+	  });
+	  
+	  }
+	  
+ 
   
- function getQuote(){
-     var url="https://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=jsonp&jsonp=?";
-    $.getJSON(url, function(data){
-     
-     Qt=data.quoteText;
-     At=data.quoteAuthor;
-	 
-	 if(At == ''){
-		At = "Unknown";
-	 }
-   $(".msg").html('"' + Qt + '"');
-      
-   $(".author").html('-' + At );
-    }); 		
- };
-  $(".twt").on("click", tweet);
-  function tweet(){ 
-    var tweetQt= Qt;
-    var tweetAt=At;
-    var url="https://twitter.com/intent/tweet?text="+ tweetQt + "  -"+ tweetAt;
-      window.open(url, "_blank");
-   };  
   
-  $("#newQuote").on("click", function(){
-    getQuote();
-  });
 });
-</script>
 
+</script>
 
 </html>
