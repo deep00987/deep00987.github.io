@@ -17,7 +17,7 @@
 	<style>
 	
 		body{
-			background-image:url("https://static.pexels.com/photos/158607/cairn-fog-mystical-background-158607.jpeg");
+			background-image:url("https://static.pexels.com/photos/509687/pexels-photo-509687.jpeg");
 			background-position:center center;
 			background-attachment:fixed;
 			background-repeat:no-repeat;
@@ -42,14 +42,34 @@
 			font-family:Lobster;
 			color:#4f1f16;
 		}
+		#block{
+			margin-top:5%;
+		 
+		}
+		div.daily{
+		
+			padding-top:5%;
+		
+		}
 		@media only screen and (max-width: 500px) {
 			#box{
-			width:90%;
-			margin-left:5%;
-			margin-right:5%;
-			background-color:rgba(225,225,225,.60);
+				width:90%;
+				margin-left:5%;
+				margin-right:5%;
+				background-color:rgba(225,225,225,.60);
+				
 			
-		}
+			}
+			#icon{
+				width:96px;
+				height:96px;
+			
+			}
+			body{
+			
+				min-height:100vh;
+			
+			}
 			
 		}
 
@@ -68,20 +88,34 @@
 		
 	<div id="box" class="container jumbotron">
 		
-		<div class="row main" align="center">
+		<div class="row main">
 			<div class="col-md-6 col-md-12" id="one">
-				<h2><span class="loc"></span></h2>
-				<h4><span class="desc"></span></h4>
-				<h2><span><img src="#" alt="" class="icon"></img></span><span class ="temp"></span>&deg;<a  href="#"class="change">C</a></span> | <a  href="#"class="change2">F</a></h2>
+				<h3><span class="loc"></span></h3>
+				<i><h5><span class="date"></span></h5></i>
+				<h5><span class="desc"></span></h5>
+				
+				<div class="row" align="center">
+					<div class="col-md-6 col-xm-6">
+						<img src="#" id="icon" width="128px" height="128px"></img></span>
+					</div>
+					<div class="col-md-6 col-xm-6" id="block">
+						<h2><span class ="temp"></span>&deg;<a  href="#"class="change">C</a></span> | <a  href="#"class="change2">F</a></h2>
+					</div>
+				</div>
 			</div>
-			<div class="col-md-6 col-md-12" id="two">
-				<h3 class="city"></h3>
-				<h3 class="wind"></h3>
+			<div class="col-md-6 col-md-12" id="two" align="center">
+				<h3 class="city"> </h3>
+				<h3 class="wind"> </h3>
 				<h3 class="preasure"></h3>
 			</div>
+			
+		</div>
+		
+		<div align="center">
+			<h4 class="daily"></h4>
 		</div>
 	</div>
-	<div align="center" id="add" style="color:#f4e4dc;padding-top:3%;"><h5>Coded and designed by <a href="https://www.facebook.com/profile.php?id=100009758328154&ref=bookmarks">Dwip S.Mondal</a> powered by <a href="https://openweathermap.org/api">OpenWeatherMap API</a></h5></div>
+	<div align="center" id="add" style="color:#f4e4dc;padding-top:3%;"><h5>Coded and designed by <a href="https://www.facebook.com/profile.php?id=100009758328154&ref=bookmarks">Dwip S.Mondal</a> powered by <a href="https://darksky.net/dev/">Dark sky API</a></h5></div>
 </body>
 
 <script>
@@ -93,76 +127,126 @@
 		navigator.geolocation.getCurrentPosition(function(position) {
 		  lat = position.coords.latitude;
 		  log = position.coords.longitude; 
-		  var url2 = "http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+log+"&appid=c0f103118dea6c47909754c7e22ad0f6&units=imperial";
-		  var url="http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+log+"&appid=c0f103118dea6c47909754c7e22ad0f6&units=metric";
+		  url= 'https://crossorigin.me/https://api.darksky.net/forecast/27cadd69d06d8c0c792391701e8550b0/'+lat+','+log+'?units=si';
+		  url2='https://crossorigin.me/https://api.darksky.net/forecast/27cadd69d06d8c0c792391701e8550b0/'+lat+','+log;
+		  
 		  $.getJSON(url,function(data){
-			var temperature = data.main.temp;
-			var icon = "http://openweathermap.org/img/w/"+data.weather[0].icon+".png";
-			var desc = data.weather[0].description;
-			var humid = data.main.humidity;
-			var country = data.sys.country;
-			var city = data.name;
-			var wind = data.wind.speed;
-			var preasure = data.main.pressure;
-			$(".temp").html(temperature);
-			$(".icon").attr('src',icon);
-			$(".desc").html(desc);
-			$(".city").html("Humidity: "+humid+"%");
-			$(".loc").html("location: "+city +","+country);
-			$(".wind").html("wind: "+wind+" km/h");
-			$(".preasure").html("Pressure: "+preasure+" pascal");
-			
-			
-			
-		  });
 		  
-		  $(".change2").on("click",function(){
-			$.getJSON(url2,function(data){
-			var temperature = data.main.temp;
-			var icon = "http://openweathermap.org/img/w/"+data.weather[0].icon+".png";
-			var desc = data.weather[0].description;
-			var humid = data.main.humidity;
-			var country = data.sys.country;
-			var city = data.name;
-			var wind = data.wind.speed;
-			var preasure = data.main.pressure;
-			$(".temp").html(temperature);
-			$(".icon").attr('src',icon);
-			$(".desc").html(desc);
-			$(".city").html("Humidity: "+humid+"%");
-			$(".loc").html("location: "+city +","+country);
-			$(".wind").html("wind: "+wind+" m/s");
-			$(".preasure").html("Pressure: "+preasure+" pascal");
+			console.log(data);
+
+			$(".temp").html(Math.round(data.currently.temperature));
+			$(".city").html("Humidity: "+data.currently.humidity*100+"%");
+			$(".wind").html("Wind: "+data.currently.windSpeed+" kmph");
+			$(".preasure").html("Pressure: "+data.currently.pressure+" Pa");
+			$(".loc").html("Location: "+data.timezone);
+			$(".desc").html("Summary:"+"<b>"+data.currently.summary+"</b>");
+			$(".daily").html(data.daily.summary);
+
+			var list = [
+            "clear-day", "clear-night", "partly-cloudy-day",
+            "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
+            "fog"
+          ];
+			for(var i=0; i<10; i++){
+			
+				if(data.currently.icon == list[i]){
+					
+					$("#icon").attr('src',data.currently.icon+".png");
+					
+				}
+			
+			}
+			var current = $.now();
+			var maxDate = new Date(current);
+			var currentDate = maxDate.toString();
+			$(".date").html(currentDate);
 			
 			
-		  });
-			
-			
-		  });
 		  
-		  $(".change").on("click",function(){
-			$.getJSON(url,function(data){
-			var temperature = data.main.temp;
-			var icon = "http://openweathermap.org/img/w/"+data.weather[0].icon+".png";
-			var desc = data.weather[0].description;
-			var humid = data.main.humidity;
-			var country = data.sys.country;
-			var city = data.name;
-			var wind = data.wind.speed;
-			var preasure = data.main.pressure;
-			$(".temp").html(temperature);
-			$(".icon").attr('src',icon);
-			$(".desc").html(desc);
-			$(".city").html("Humidity: "+humid+"%");
-			$(".loc").html("location: "+city +","+country);
-			$(".wind").html("wind: "+wind+" km/h");
-			$(".preasure").html("Pressure: "+preasure+" pascal");
-			
-			
-			
 		  });
 			
-		  });
+			$(".change2").on("click",function(){
+			
+				$.getJSON(url2,function(data){
+		  
+				console.log(data);
+
+				$(".temp").html(Math.round(data.currently.temperature));
+				$(".city").html("Humidity: "+data.currently.humidity*100+"%");
+				$(".wind").html("Wind: "+data.currently.windSpeed+" mph");
+				$(".preasure").html("Pressure: "+data.currently.pressure+" Ba");
+				$(".loc").html("Location: "+data.timezone);
+				$(".desc").html("Summary:"+"<b>"+data.currently.summary+"</b>");
+				
+
+				var list = [
+				"clear-day", "clear-night", "partly-cloudy-day",
+				"partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
+				"fog"
+				];
+				for(var i=0; i<10; i++){
+				
+					if(data.currently.icon == list[i]){
+						
+						$("#icon").attr('src',data.currently.icon+".png");
+						
+					}
+				
+				}
+				var current = $.now();
+				var maxDate = new Date(current);
+				var currentDate = maxDate.toString();
+				$(".date").html(currentDate);
+				
+				
+			  
+			  });
+			
+			
+			});	
+			$(".change").on("click",function(){
+			
+			
+				$.getJSON(url,function(data){
+		  
+				console.log(data);
+
+				$(".temp").html(Math.round(data.currently.temperature));
+				$(".city").html("Humidity: "+data.currently.humidity*100+"%");
+				$(".wind").html("Wind: "+data.currently.windSpeed+" kmph");
+				$(".preasure").html("Pressure: "+data.currently.pressure+" Pa");
+				$(".loc").html("Location: "+data.timezone);
+				$(".desc").html("Summary:"+"<b>"+data.currently.summary+"</b>");
+				
+
+				var list = [
+				"clear-day", "clear-night", "partly-cloudy-day",
+				"partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
+				"fog"
+			  ];
+				for(var i=0; i<10; i++){
+				
+					if(data.currently.icon == list[i]){
+						
+						$("#icon").attr('src',data.currently.icon+".png");
+						
+					}
+				
+				}
+				var current = $.now();
+				var maxDate = new Date(current);
+				var currentDate = maxDate.toString();
+				$(".date").html(currentDate);
+				
+				
+			  
+			  });
+				
+			
+			});
+			
+					  
+		  
 		  
 	  });
 	  
@@ -174,5 +258,7 @@
 });
 
 </script>
+
+
 
 </html>
