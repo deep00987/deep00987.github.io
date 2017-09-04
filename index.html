@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>nothuig</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="jquery-3.2.1.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+	
+
+
+</head>
+
+
+<body class="green-bg" >
+	<div id="text" align="center" class="container-fluid">
+		<h2 id="frontText">JavaScript Calculator</h2>
+	</div>
+	<hr id="line">
+	<div class="container" id="primary" align="center">
+		
+		<div id="calx">
+			<h4>E-Calx</h4>
+			<form>
+				<input type="text" id="screen" disabled>
+			</form>
+			<br>
+			<input type="button" id="btn3" value="AC" onclick="addScr('AC')">
+			<input type="button" id="btn3" value="CR" onclick="clearRight()">
+			<input type="button" id="btn1" value="/" onclick="addScr('/')">
+			<input type="button" id="btn1" value="*" onclick="addScr('*')">
+			<br>
+			<input type="button" id="btn1" value="1" onclick="addScr('1')">
+			<input type="button" id="btn1" value="2" onclick="addScr('2')">
+			<input type="button" id="btn1" value="3" onclick="addScr('3')">
+			<input type="button" id="btn1" value="+" onclick="addScr('+')">
+			<br>
+			<input type="button" id="btn1" value="4" onclick="addScr('4')">
+			<input type="button" id="btn1" value="5" onclick="addScr('5')">
+			<input type="button" id="btn1" value="6" onclick="addScr('6')">
+			<input type="button" id="btn1" value="-" onclick="addScr('-')">
+			<br>
+			<input type="button" id="btn1" value="7" onclick="addScr('7')">
+			<input type="button" id="btn1" value="8" onclick="addScr('8')">
+			<input type="button" id="btn1" value="9" onclick="addScr('9')">
+			<input type="button" id="btn1" value="=" onclick="ans('=')">
+			<br>
+			<input type="button" id="btn2" value="0" onclick="addScr('0')">
+			<input type="button" id="btn1" value="." onclick="addScr('.')">
+			<input type="button" id="btn1" value="√x" onclick="root('√x')">
+		</div>
+		
+		
+		
+	</div>
+	<div class="container-fluid" align="center"><h4 id="text2">Coded and designed by <a href="https://www.facebook.com/profile.php?id=100009758328154&ref=bookmarks" style="color:#FF0042;" target="_blank">Dwip S. Mondal</a></h4></div>
+<script>
+	var txtBox = document.getElementById("screen");
+	
+	function addScr(x){
+		txtBox.value +=x;
+		if(x==="AC"){
+			txtBox.value="";
+		}	
+	}
+	function ans(){
+		x = txtBox.value;
+		x=eval(x);
+		txtBox.value = x;
+	}
+	function clearRight(){
+		var x1 = txtBox.value;
+		var len = x1.length - 1;
+		var back = x1.substring(0,len);
+		txtBox.value = back;
+	}
+	function root(){
+		x = txtBox.value;
+		x=eval(Math.sqrt(x));
+		txtBox.value = x;
+	}
+	
+	
+	
+	
+	
+	
+	
+</script>
+
+
+</body>
+
+</html>
