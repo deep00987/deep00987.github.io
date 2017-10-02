@@ -1,0 +1,171 @@
+td{
+	border:2px solid black;
+	height: 85px;
+	width:85px;
+	cursor: pointer;
+	z-index: 1;
+	font-weight: bold;
+	font-size: 35px;
+}
+body{
+	background-image: url(https://4.bp.blogspot.com/-0yoofdrndQA/VRo3PRp-PCI/AAAAAAABf9Q/aQ9k07-QbUU/s0/3D_abstract_art_Escapism_hd.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	background-position: center center;
+}
+.slot{
+	text-align:center;
+}
+.end{
+	width: 254px;
+	height: 254px;
+	background-color: rgba(0,0,0,.75);
+	z-index:2;
+	margin-top: -255px;
+	display: none;
+	color:white;
+	padding-top:7%;
+	
+}
+
+#startMenu{
+	margin-top: 4%;
+	padding-top:1%;
+	padding-bottom: 5%;
+	background-color: rgba(227, 231, 237,.50);
+	width:45%;
+	border-radius: 5px;
+}
+
+.custom{
+	width:75px;
+
+}
+#reset{
+	border: 2px solid #C70039;
+	color:#C70039;
+	background-color: rgba(227, 231, 237,.10);
+	font-weight: bold;
+}
+#goBack{
+	border: 2px solid #C70039;
+	color:#C70039;
+	background-color: rgba(227, 231, 237,.10);
+	font-weight: bold;
+}
+
+#table{
+	margin-top: 7%;
+}
+#txt2{
+	padding-top: 7%;
+	margin-bottom: -5%;
+	color:#34321D;
+	font-weight: bold;
+}
+#txt1{
+	padding-top: -2%;
+	color:#34321D;
+}
+#start{
+	margin-top: 4%;
+	background-color: rgba(227, 231, 237,0);
+	border: 2px solid #C70039;
+	color:#C70039;
+	font-weight: bold;
+}
+#start:hover{
+	border: 2px solid #FF5733;
+	color:#FF5733;
+	transition:.35s linear;
+}
+#reset:hover{
+	border: 2px solid #FF5733;
+	color:#FF5733;
+	transition:.35s linear;
+}
+#goBack:hover{
+	border: 2px solid #FF5733;
+	color:#FF5733;
+	transition:.35s linear;
+}
+#link{
+	color:#C70039;
+	text-decoration: none;
+
+}
+
+.slot{
+	background-color: rgba(227, 231, 237,.65);
+}
+#btn_fancy{
+	width:50px;
+	height:50px;
+	border: 2px solid #A3A287;
+	border-radius: 100%;
+}
+#btn_fancy i{
+	vertical-align:center;
+	padding-top:4px !important;
+	margin-left:-1px;
+}
+#btn_fancy:hover{
+	background-color:#8d00f2;
+	color:white;
+	-webkit-transition:all .3s ease-in;
+	transition:all .3s ease-in;
+}
+#footer{
+	padding-top: 6%;
+
+}
+#text3{
+	font-weight: bold;
+	color:#A3A287;
+}
+
+#header{
+	background-color: rgba(0,0,0,.50);
+	padding-top:5px;
+	color:#A3A287;
+
+}
+#header2{
+	padding-bottom: 3px;
+}
+#main{
+	padding-top: 3%;
+}
+
+
+@media only screen and (max-width: 500px) {
+    .end {
+        padding-top:27%;
+    }
+    #startMenu{
+		padding-top:3%;
+		padding-bottom: 20%;
+		background-color: rgba(227, 231, 237,.65);
+		width:100%;
+		margin-top: 15%;
+	}
+	#table{
+		margin-top: 20%;
+	}
+	#txt2{
+		padding-top: 7%;
+	}
+	#footer{
+		padding-top: 22%;
+
+	}
+	#txt2{
+		font-size: 12px;
+		margin-bottom: -12%;
+	}
+	#main{
+	padding-top: 13%;
+}
+}
+

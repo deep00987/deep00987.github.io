@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>Tic tac toe</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="jquery-3.2.1.min.js"></script>
+
+	<link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+	<script src="https://use.fontawesome.com/0d0dd72771.js"></script>
+	
+</head>
+
+<body>
+	<div id="header" align="center">
+		<h3 id="header2">Tic tac Toe</h3>
+		<hr>
+	</div>
+	<div class="container-fluid" align="center" id="main">
+
+		<div class="menu" id="startMenu">
+			<h3 id = "txt1">Welcome to Tic Tac Toe.</h3>
+			<a href="#" class="btn btn-primary" id="start">StartGame</a>
+			<h5 id = "txt2">Coded and Designed by <a href="https://www.facebook.com/profile.php?id=100009758328154" id="link">Dwip S.Mondal</a></h5>
+		</div>	
+
+
+		<table id="table">
+			<tr >
+				<td class="slot" id="0"></td>
+				<td class="slot" id="1"></td>
+				<td class="slot" id="2"></td>
+			</tr>
+			<tr>
+				<td class="slot" id="3"></td>
+				<td class="slot" id="4"></td>
+				<td class="slot" id="5"></td>
+			</tr>	
+			<tr>
+				<td class="slot" id="6"></td>
+				<td class="slot" id="7"></td>
+				<td class="slot" id="8"></td>
+			</tr>		
+		</table>
+		<div class="end">
+			<div class="text" align="center"></div>
+			<a href="#" class="btn btn-primary custom" id="reset" onclick="startGame()">restart</a>
+			<a href="#" class="btn btn-primary custom" id="goBack">Menu</a>
+		</div>	
+		
+	</div>
+	<div id="footer" align="center">
+		<h5 id="text3">|| Me around the web ||</h5>
+		<a href="https://www.facebook.com/profile.php?id=100009758328154" class="btn btn-default btn-lg" id="btn_fancy"><i class="fa fa-facebook"></i></a>
+		<a href="https://plus.google.com/u/0/100469127184877052537" class="btn btn-default btn-lg" id="btn_fancy"><i class="fa fa-google-plus"></i></a>
+		<a href="https://github.com/deep00987" class="btn btn-default btn-lg" id="btn_fancy"><i class="fa fa-github"></i></a>
+		<a href="https://www.reddit.com/user/deep00987/" class="btn btn-default btn-lg" id="btn_fancy"><i class="fa fa-reddit"></i></a>
+	</div>	
+<script>
+	// styling and stuff 
+	$("#table").hide();
+	$("#start").click(function(){
+		$("#table").show();
+		$("#startMenu").hide();
+		startGame();
+	});
+	$("#goBack").click(function(){
+		$("#table").hide();
+		$("#startMenu").show();
+		$(".end").hide();
+	});
+
+	// functionalities
+
+	var gameBoard;
+	const human = "X";
+	const AI  = "O";
+	const winMove = [[0,1,2],[3,4,5],[6,7,8],[1,4,7],[2,5,8],[0,3,6],[0,4,8],[6,4,2]];
+	// selecting every element that has class "slot"
+	const slots = document.querySelectorAll(".slot");
+	startGame();
+	function startGame(){
+		document.querySelector(".end").style.display = "none";
+		// making an array with numbers from 1 - 9 
+		gameBoard = Array.from(Array(9).keys());
+		console.log(gameBoard);
+		// loops through all slots and eventListener 
+		for(var i = 0; i<slots.length;i++){
+			slots[i].innerText = "";
+			slots[i].style.removeProperty("background-color");
+			/* adding eventListener everytime clicked ant slots and triggering tuenClick function */
+			slots[i].addEventListener("click",turnClick,false);
+		}
+	}
+	/* for finding slots target id and to use it later on and triggering turn function */ 
+	function turnClick(slotID){
+		if(typeof gameBoard[slotID.target.id] == "number"){
+			console.log(slotID.target.id);
+			turn(slotID.target.id, human);
+			//check if tie or make AI's tuen
+			if (!checkWin(gameBoard,human) && !checkTie()) {turn(bestSpot(), AI);}
+		}
+
+	}
+
+	function turn(slot_target, player){
+		gameBoard[slot_target] = player;
+		document.getElementById(slot_target).innerText = player;
+		let gameOwn = checkWin(gameBoard,player);
+		if (gameOwn){
+			gameOver(gameOwn);
+		} //this/
+	}
+	function checkWin(board,player){
+		let plays = board.reduce((a, e, i) => 
+			(e === player) ? a.concat(i) : a, []);
+		let gameOwn = null;
+		//creating a loop that itarates through winMove Array
+		for(let [index, win] of winMove.entries()){
+			/*checking if the every element of win array is equal to plays array meaning the index of plays array will be equal to any elem of win move array*/
+			if(win.every(element => plays.indexOf(element) > -1)){
+				gameOwn = {index: index, player: player};
+				break;
+			}
+		}
+		return gameOwn;
+	}
+	function gameOver(gameOwn){
+		// for highlighting win combos 
+		for(let index of winMove[gameOwn.index]){
+			//itarates through every index of winMove Array
+			document.getElementById(index).style.backgroundColor = gameOwn.player == human ? "blue" : "red";
+
+		}
+		// for makeing already played slot unplayable
+		for(var i =0; i <slots.length; i++){
+			slots[i].removeEventListener("click" ,turnClick ,false);
+		}
+		tellWinner(gameOwn.player == human ? "You Win" : "You Lose");
+	}
+
+	function tellWinner(name_player){
+		document.querySelector(".end").style.display = "block";
+		document.querySelector(".text").innerText = name_player;
+
+	}
+
+	function emptySlots(){
+		return gameBoard.filter(x => typeof x == "number");
+	}
+
+	function bestSpot(){
+		/*var coin = Math.floor((Math.random() * 8) + 1);
+
+  		if (coin == 1) {
+   		 	return emptySlots()[0];   // before minMax
+  		}
+  		if (coin == 2) {
+   		 	return emptySlots()[1];   // before minMax
+  		}   
+  		if (coin == 3) {
+   		 	return emptySlots()[1];   // before minMax
+  		}   
+  		if (coin == 4) {
+   		 	return emptySlots()[0];   // before minMax
+  		}   
+  		if (coin == 5) {
+   		 	return emptySlots()[0];   // before minMax
+  		}   
+  		if (coin == 6) {
+   		 	return emptySlots()[1];   // before minMax
+  		}      
+  		if (coin == 7) {
+   		 	return emptySlots()[0];   // before minMax
+  		}   
+  		if (coin == 8) {
+   		 	return emptySlots()[1];   // before minMax
+  		}  
+		 return emptySlots()[1]; // before minimax
+		*/
+		// for mini Max algorithm 
+
+		/* you can remove the minimax function but then you have to un comment the above code to run the basic AI*/
+
+		return minimax(gameBoard, AI).index;
+	}
+
+	function checkTie(){
+		if(emptySlots().length == 0){
+			for(var i = 0; i < slots.length; i++){
+				slots[i].style.backgroundColor="green";
+				slots[i].removeEventListener("click", turnClick , false);
+			}
+			tellWinner( "Game Draw");
+			return true;
+		}
+		return false;
+	}
+
+	function minimax(newBoard, player){
+		var availSpots = emptySlots(newBoard);
+		// setting the terminal states for win  lose or tie
+		if (checkWin(newBoard, human)) {
+			return {score: -10};
+		} else if (checkWin(newBoard, AI)) {
+			return {score: 10};
+		} else if (availSpots.length === 0) {
+			return {score: 0};
+		}
+		var moves = [];
+		for (var i = 0; i < availSpots.length; i++) {
+			var move = {};
+			move.index = newBoard[availSpots[i]];
+			newBoard[availSpots[i]] = player;
+			/* if AI's turn is done minimax function is recalled with human player or the opposite*/
+			if (player == AI) {
+				var result = minimax(newBoard, human);
+				move.score = result.score;
+			} else {
+				var result = minimax(newBoard, AI);
+				move.score = result.score;
+			}
+
+			newBoard[availSpots[i]] = move.index;
+
+			moves.push(move);
+		}
+
+		var bestMove;
+		// finding the best move 
+		if(player === AI) {
+			// setting best move as a very low number
+			var bestScore = -10000;
+			for(var i = 0; i < moves.length; i++) {
+				/*now if AI's move is higher than that move then update it as best and in the other case the opposite*/
+				if (moves[i].score > bestScore) {
+					bestScore = moves[i].score;
+					bestMove = i;
+				}
+			}
+		} else {
+			var bestScore = 10000;
+			for(var i = 0; i < moves.length; i++) {
+				if (moves[i].score < bestScore) {
+					bestScore = moves[i].score;
+					bestMove = i;
+				}
+			}
+		}
+
+		return moves[bestMove];
+	}
+
+</script>	
+
+
+
+</body>
+
+
+</html>
